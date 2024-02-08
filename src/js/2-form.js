@@ -32,7 +32,8 @@ feedbackForm.addEventListener(`submit`, event => {
   } else {
     console.log(localStorage.getItem(localStorageKey));
     alert(`Thanks for the data!`);
+    feedbackForm.reset();
   }
-  feedbackForm.reset();
+
   localStorage.removeItem(localStorageKey);
 });
