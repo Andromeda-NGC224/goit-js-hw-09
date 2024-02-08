@@ -98,5 +98,12 @@ gallery = new SimpleLightbox('.gallery a', {
   captionType: 'attr',
   captionsData: 'alt',
   captionPosition: 'bottom',
+  scrollZoom: false,
+  animationSlide: true,
+  animationSpeed: 250,
+  widthRatio: 1,
+  heightRatio: 0.95,
+  scaleImageToRatio: true,
+  fadeSpeed: 1000,
 });
 // gallery.on('show.simplelightbox');
