@@ -1,4 +1,8 @@
 `use strict`;
+
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.css';
+
 const images = [
   {
     preview:
@@ -65,8 +69,6 @@ const images = [
   },
 ];
 
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.css';
 const gallery = document.querySelector(`.gallery`);
 for (let i = 0; i < images.length; i++) {
   const galleryItem = document.createElement(`li`);
@@ -82,28 +84,15 @@ for (let i = 0; i < images.length; i++) {
   galleryImage.setAttribute('data-source', images[i].original);
   galleryImage.alt = images[i].description;
 
-  galleryLink.addEventListener(`click`, function (event) {
-    event.preventDefault();
-  });
-
   gallery.append(galleryItem);
   galleryItem.append(galleryLink);
   galleryLink.append(galleryImage);
 }
 
-gallery = new SimpleLightbox('.gallery a', {
-  caption: true,
+const lightbox = new SimpleLightbox('.gallery a', {
   captionDelay: 250,
   captionSelector: 'img',
-  captionType: 'attr',
   captionsData: 'alt',
-  captionPosition: 'bottom',
   scrollZoom: false,
-  animationSlide: true,
-  animationSpeed: 250,
-  widthRatio: 1,
-  heightRatio: 0.95,
-  scaleImageToRatio: true,
   fadeSpeed: 1000,
 });
-// gallery.on('show.simplelightbox');

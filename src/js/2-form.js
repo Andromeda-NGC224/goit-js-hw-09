@@ -1,25 +1,26 @@
 `use strict`;
 const feedbackForm = document.querySelector(`.feedback-form`);
-const emailInpup = document.querySelector('[name="email"]');
-const massageInpup = document.querySelector('[name="message"]');
+const emailInput = document.querySelector('[name="email"]');
+const messageInput = document.querySelector('[name="message"]');
 const localStorageKey = 'feedback-form-state';
 let parsedStorage;
 const storageData = localStorage.getItem(localStorageKey);
-if (storageData === null) {
-  parsedStorage = {};
-} else {
+
+if (storageData !== null && storageData !== undefined) {
   parsedStorage = JSON.parse(storageData);
+} else {
+  parsedStorage = {};
 }
 
-emailInpup.value = parsedStorage.email || ``;
-massageInpup.value = parsedStorage.massage || ``;
+emailInput.value = parsedStorage.email || ``;
+messageInput.value = parsedStorage.message || ``;
 
 feedbackForm.addEventListener(`input`, fooForm);
 
 function fooForm(event) {
   let feedbackFormState = {
-    email: emailInpup.value.trim(),
-    massage: massageInpup.value.trim(),
+    email: emailInput.value.trim(),
+    message: messageInput.value.trim(),
   };
 
   localStorage.setItem(localStorageKey, JSON.stringify(feedbackFormState));
@@ -27,13 +28,15 @@ function fooForm(event) {
 
 feedbackForm.addEventListener(`submit`, event => {
   event.preventDefault();
-  if (emailInpup.value === `` || massageInpup.value === ``) {
+  if (emailInput.value.trim() === `` || messageInput.value.trim() === ``) {
     alert('Fill in all fields, please');
   } else {
-    console.log(localStorage.getItem(localStorageKey));
-    alert(`Thanks for the data!`);
+    const resultString = localStorage.getItem(localStorageKey);
+    if (resultString) {
+      const resultObject = JSON.parse(resultString);
+      console.log(resultObject);
+    }
     feedbackForm.reset();
+    localStorage.removeItem(localStorageKey);
   }
-
-  localStorage.removeItem(localStorageKey);
 });
